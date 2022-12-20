@@ -1,24 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { TransformationComponent } from './components/Transformation';
+import { getTransformations } from './hooks/getTransformations';
+import { v4 as uuidv4 } from 'uuid';
+import { mapping } from './constants/mapping';
 
 function App() {
+	const transformations = getTransformations(mapping);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        {transformations.map((transformation)=> <TransformationComponent  key={uuidv4()} sources={transformation.sources} target={transformation.target} actions={transformation.actions}/>)}
     </div>
   );
 }
