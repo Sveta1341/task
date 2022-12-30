@@ -1,23 +1,24 @@
-export function adjustLine(from, to, line) {
+function adjustLine(from, to, line) {
+  let top;
+  let left;
   const fT = from.offsetTop + from.offsetHeight / 2;
   const tT = to.offsetTop + to.offsetHeight / 2;
   const fL = from.offsetLeft + from.offsetWidth / 2;
   const tL = to.offsetLeft + to.offsetWidth / 2;
-
   const CA = Math.abs(tT - fT);
   const CO = Math.abs(tL - fL);
   const H = Math.sqrt(CA * CA + CO * CO);
-  var ANG = (180 / Math.PI) * Math.acos(CA / H);
+  let ANG = (180 / Math.PI) * Math.acos(CA / H);
 
   if (tT > fT) {
-    var top = (tT - fT) / 2 + fT;
+    top = (tT - fT) / 2 + fT;
   } else {
-    var top = (fT - tT) / 2 + tT;
+    top = (fT - tT) / 2 + tT;
   }
   if (tL > fL) {
-    var left = (tL - fL) / 2 + fL;
+    left = (tL - fL) / 2 + fL;
   } else {
-    var left = (fL - tL) / 2 + tL;
+    left = (fL - tL) / 2 + tL;
   }
 
   if (
@@ -30,9 +31,11 @@ export function adjustLine(from, to, line) {
   }
   top -= H / 2;
 
-  line.style.transformOrigin = "rotate(" + ANG + "deg)";
-  line.style.transform = "rotate(" + ANG + "deg)";
-  line.style.top = top + "px";
-  line.style.left = left + "px";
-  line.style.height = H + "px";
+  line.style.transformOrigin = `rotate(${ANG}deg)`;
+  line.style.transform = `rotate(${ANG}deg)`;
+  line.style.top = `${top}px`;
+  line.style.left = `${left}px`;
+  line.style.height = `${H}px`;
 }
+
+export default adjustLine;

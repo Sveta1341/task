@@ -1,16 +1,13 @@
-import React from "react";
-import { FC } from "react";
-import { Target } from "../../types.ts";
-import  './target.css';
+import React, { FC } from "react";
+import { Target } from "../../types";
+import "./target.css";
 
 interface TargetProps extends Target {
-	index: number | string
+  index: number | string;
 }
 
-export const TargetComponent: FC<TargetProps> = ({id, name, index}) => {
-    return (
-    <div id={`${id}-${index}`} className="target" >
-        <p>{name}</p>
-    </div>
-    )
-}
+export const TargetComponent: FC<TargetProps> = ({ id, name, index }) => (
+  <div id={`${id}-${index}`} className="target">
+    <p>{name}</p>
+  </div>
+);
