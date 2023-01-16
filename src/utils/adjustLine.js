@@ -4,7 +4,7 @@ function adjustLine(from, to, line) {
   const fT = from.offsetTop + from.offsetHeight / 2;
   const tT = to.offsetTop + to.offsetHeight / 2;
   const fL = from.offsetLeft + from.offsetWidth / 2;
-  const tL = to.offsetLeft + to.offsetWidth / 2;
+  const tL = to.offsetLeft + to.offsetWidth;
   const CA = Math.abs(tT - fT);
   const CO = Math.abs(tL - fL);
   const H = Math.sqrt(CA * CA + CO * CO);

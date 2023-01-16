@@ -1,4 +1,4 @@
-export const mapping = {
+export const DEFAULT_MAPPING = {
   sources: [
     {
       id: "src1",

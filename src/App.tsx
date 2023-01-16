@@ -1,32 +1,35 @@
 import "./App.css";
+import { css } from "@emotion/css";
 import { v4 as uuidv4 } from "uuid";
-import { useEffect, useState } from "react";
-import { TransformationComponent } from "./components/Transformation";
+import { useMemo, useState } from "react";
+import { TransformationNode } from "./components/Transformation";
 import { getTransformations } from "./utils/getTransformations";
-import { mapping } from "./constants/mapping";
-import { InputComponent } from "./components/Form/Input";
-import { Transformation } from "./types";
+import { DEFAULT_MAPPING } from "./constants/mapping";
+import { Input } from "./components/Form/Input";
 
 function App() {
-  const [mapp, setMapping] = useState(mapping);
-  const [transformations, setTransformations] = useState<Transformation[]>([]);
-
-  useEffect(() => {
-    const transformation = getTransformations(mapp);
-    setTransformations(transformation);
-  }, [mapp]);
+  const [mapp, setMapping] = useState(DEFAULT_MAPPING);
+  const transformations = useMemo(() => getTransformations(mapp), [mapp]);
 
   return (
     <div className="App">
-      <InputComponent key={uuidv4()} setMapping={setMapping} />
-      {transformations.map((transformation) => (
-        <TransformationComponent
-          key={uuidv4()}
-          sources={transformation.sources}
-          target={transformation.target}
-          actions={transformation.actions}
-        />
-      ))}
+      <Input key={uuidv4()} setMapping={setMapping} />
+      <div
+        className={css`
+          @media (min-width: 420px) {
+            width: 1250px;
+          }
+        `}
+      >
+        {transformations.map((transformation) => (
+          <TransformationNode
+            key={uuidv4()}
+            sources={transformation.sources}
+            target={transformation.target}
+            actions={transformation.actions}
+          />
+        ))}
+      </div>
     </div>
   );
 }
